@@ -20,5 +20,3 @@
 		%>
 	</body>
  </html>
- 
- setAttribute(String name, Object value)
