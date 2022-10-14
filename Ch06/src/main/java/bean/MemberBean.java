@@ -1,11 +1,12 @@
 package bean;
 
 public class MemberBean {
+
 	private String uid;
 	private String name;
 	private String hp;
 	private String pos;
-	private Integer dep;
+	private int dep;
 	private String rdate;
 	
 	public String getUid() {
@@ -32,10 +33,10 @@ public class MemberBean {
 	public void setPos(String pos) {
 		this.pos = pos;
 	}
-	public Integer getDep() {
+	public int getDep() {
 		return dep;
 	}
-	public void setDep(Integer dep) {
+	public void setDep(int dep) {
 		this.dep = dep;
 	}
 	public String getRdate() {
@@ -45,7 +46,4 @@ public class MemberBean {
 		this.rdate = rdate;
 	}
 	
-	
-	
-
 }

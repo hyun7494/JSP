@@ -1,40 +1,41 @@
 package bean;
 
 public class StudentBean {
-	private String StdNo;
-	private String StdName;
-	private String StdHp;
-	private Integer StdYear;
-	private String StdAddress;
+
+	private String stdNo;
+	private String stdName;
+	private String stdHp;
+	private int stdYear;
+	private String stdAddress;
+	
 	public String getStdNo() {
-		return StdNo;
+		return stdNo;
 	}
 	public void setStdNo(String stdNo) {
-		StdNo = stdNo;
+		this.stdNo = stdNo;
 	}
 	public String getStdName() {
-		return StdName;
+		return stdName;
 	}
 	public void setStdName(String stdName) {
-		StdName = stdName;
+		this.stdName = stdName;
 	}
 	public String getStdHp() {
-		return StdHp;
+		return stdHp;
 	}
 	public void setStdHp(String stdHp) {
-		StdHp = stdHp;
+		this.stdHp = stdHp;
 	}
-	public Integer getStdYear() {
-		return StdYear;
+	public int getStdYear() {
+		return stdYear;
 	}
-	public void setStdYear(Integer stdYear) {
-		StdYear = stdYear;
+	public void setStdYear(int stdYear) {
+		this.stdYear = stdYear;
 	}
 	public String getStdAddress() {
-		return StdAddress;
+		return stdAddress;
 	}
 	public void setStdAddress(String stdAddress) {
-		StdAddress = stdAddress;
+		this.stdAddress = stdAddress;
 	}
-
 }

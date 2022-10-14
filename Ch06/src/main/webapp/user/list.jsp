@@ -7,10 +7,10 @@
 <%@page import="java.sql.DriverManager"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-		//데이터베이스 처리
-		String host = "jdbc:mysql://127.0.0.1:3306/java1db";
-		String user = "root";
-		String pass = "1234";
+	//데이터베이스 처리
+	String host = "jdbc:mysql://127.0.0.1:3306/java1db";
+	String user = "root";
+	String pass = "1234";
 
 	List<UserBean> users = null;
 	
@@ -73,9 +73,18 @@
 				<td>
 					<a href="./modify.jsp?uid=<%= ub.getUid() %>">수정</a>
 					<a href="./delete.jsp?uid=<%= ub.getUid() %>">삭제</a>
-				</td>				
+				</td>
 			</tr>
 			<% } %>
 		</table>		
 	</body>
 </html>
+
+
+
+
+
+
+
+
+

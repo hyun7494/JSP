@@ -5,16 +5,16 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.util.concurrent.ExecutionException"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="config.DB"%>
+<%@page import="config.JDBC"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	List<StudentBean> students = null;
+	List<StudentBean> students = new ArrayList<>();
 
 	try{
-		Connection conn = DB.getInstance().getConnection();
+		Connection conn = JDBC.getInstance().getConnection();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM `student`");
-		students = new ArrayList<>();
+		
 		while(rs.next()){
 			StudentBean sb = new StudentBean();
 			sb.setStdNo(rs.getString(1));
@@ -63,11 +63,12 @@
 				<td><%= sb.getStdYear() %></td>
 				<td><%= sb.getStdAddress() %></td>
 				<td>
-					<a href="./modify.jsp?uid=<%= sb.getStdNo() %>">수정</a>
-					<a href="./delete.jsp?uid=<%= sb.getStdNo() %>">삭제</a>
+					<a href="#">수정</a>
+					<a href="#">삭제</a>
 				</td>
 			</tr>
 			<% } %>
 		</table>	
+		
 	</body>
 </html>
