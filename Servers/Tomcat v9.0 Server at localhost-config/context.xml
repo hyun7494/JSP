@@ -36,7 +36,32 @@
     	driverClassName="com.mysql.cj.jdbc.Driver"
     	url="jdbc:mysql://127.0.0.1:3306/java1db"
     	username="root"
-    	passowrd="1234"
+    	password="1234"
+    	maxTotal="8"
+    	maxIdle="8"
+    	maxWaitMillis="3000"
+    />
+    
+    <Resource
+    	name="dbcp_java1_shop"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="com.mysql.cj.jdbc.Driver"
+    	url="jdbc:mysql://127.0.0.1:3306/java1_shop"
+    	username="root"
+    	password="1234"
+    	maxTotal="8"
+    	maxIdle="8"
+    	maxWaitMillis="3000"
+    />
+    <Resource
+    	name="dbcp_java1_board"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="com.mysql.cj.jdbc.Driver"
+    	url="jdbc:mysql://127.0.0.1:3306/java1_board"
+    	username="java1_board"
+    	password="1234"
     	maxTotal="8"
     	maxIdle="8"
     	maxWaitMillis="3000"
