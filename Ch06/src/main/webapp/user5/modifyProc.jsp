@@ -29,7 +29,6 @@
 		psmt.setString(7, uid);
 		
 		psmt.executeUpdate();
-		
 		psmt.close();
 		conn.close();
 		
