@@ -11,7 +11,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	String pg = request.getParameter("pg");
-	
+
 	int start = 0;
 	int total = 0;
 	int lastPageNum = 0;
@@ -22,7 +22,7 @@
 	int pageStartNum = 0;
 	
 	if(pg != null){
-		currentPage = Integer.parseInt(pg);
+		currentPage = Integer.parseInt(pg);	
 	}
 	
 	start = (currentPage - 1) * 10;
@@ -64,7 +64,7 @@
         <% for(ArticleBean article : articles){ %>
         <tr>
             <td><%= pageStartNum-- %></td>
-            <td><a href="/JBoard1/view.jsp"><%= article.getTitle() %>[<%= article.getComment() %>]</a></td>
+            <td><a href="/JBoard1/view.jsp?no=<%= article.getNo() %>"><%= article.getTitle() %>[<%= article.getComment() %>]</a></td>
             <td><%= article.getNick() %></td>
             <td><%= article.getRdate().substring(2, 10) %></td>
             <td><%= article.getHit() %></td>
@@ -72,13 +72,16 @@
         <% } %>             
     </table>
     <div class="page">
+    
     	<% if(pageGroupStart > 1){ %>
-        <a href="/JBoard1/list.jsp?pg=<%= pageGroupStart -1 %>" class="prev">이전</a>
+        <a href="/JBoard1/list.jsp?pg=<%= pageGroupStart - 1 %>" class="prev">이전</a>
         <% } %>
+        
         <% for(int num = pageGroupStart ; num <= pageGroupEnd ; num++){ %>
-        <a href="/JBoard1/list.jsp?pg=<%= num %>" class="num <%= (num == currentPage) ? "current":"off"%>"><%= num %></a>
+        <a href="/JBoard1/list.jsp?pg=<%= num %>" class="num <%= (num == currentPage) ? "current":"off" %>"><%= num %></a>
         <% } %>
-		<% if(pageGroupEnd < lastPageNum){ %>
+        
+        <% if(pageGroupEnd < lastPageNum){ %>
         <a href="/JBoard1/list.jsp?pg=<%= pageGroupEnd + 1 %>" class="next">다음</a>
         <% } %>
     </div>

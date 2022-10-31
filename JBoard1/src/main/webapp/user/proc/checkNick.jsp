@@ -8,15 +8,15 @@
 <%
 	// 전송 데이터 수신
 	request.setCharacterEncoding("utf-8");
-	String nick = request.getParameter("nick");
+	String uid = request.getParameter("uid");
 	
 	// 데이터베이스 확인
 	int result = 0;
 	
 	try{
 		Connection conn = DBCP.getConnection();
-		PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_NICK);
-		psmt.setString(1, nick);
+		PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_UID);
+		psmt.setString(1, uid);
 		
 		ResultSet rs = psmt.executeQuery();
 		if(rs.next()){

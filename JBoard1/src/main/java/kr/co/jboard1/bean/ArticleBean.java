@@ -13,10 +13,33 @@ public class ArticleBean {
 	private String regip;
 	private String rdate;
 	
-	// 추가 필드 (JOIN 하면서 들고옴)
+	// 추가 필드
 	private String nick;
 	
+	private int fno;
+	private String oriName;
+	private int download;
 	
+	public int getFno() {
+		return fno;
+	}
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+	
+	public String getOriName() {
+		return oriName;
+	}
+	public void setOriName(String oriName) {
+		this.oriName = oriName;
+	}
+	
+	public int getDownload() {
+		return download;
+	}
+	public void setDownload(int download) {
+		this.download = download;
+	}
 	
 	public String getNick() {
 		return nick;
@@ -24,6 +47,7 @@ public class ArticleBean {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
+	
 	public int getNo() {
 		return no;
 	}
@@ -90,6 +114,4 @@ public class ArticleBean {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
-	
 }
