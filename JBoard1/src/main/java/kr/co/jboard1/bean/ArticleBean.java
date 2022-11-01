@@ -15,7 +15,14 @@ public class ArticleBean {
 	
 	// 추가 필드
 	private String nick;
+	private String fname;
 	
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
 	private int fno;
 	private String oriName;
 	private int download;
@@ -57,8 +64,12 @@ public class ArticleBean {
 	public int getParent() {
 		return parent;
 	}
+	// 메소드 오버로딩함
 	public void setParent(int parent) {
 		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
 	}
 	public int getComment() {
 		return comment;
