@@ -30,8 +30,88 @@
 %>
 <%@ include file="./_header.jsp" %>
 <script>
+
 		$(document).ready(function(){
 			
+			//삭제하기
+			$(document).on('click', '.remove', function(e){
+				e.preventDefault();
+				
+				let tag = $(this);
+				let result = confirm('정말 삭제 하시겠습니까?');
+				
+				if(result) {
+					
+					let no = $(this).attr('data-no');
+					
+					$.ajax({
+						url:'/JBoard1/proc/commentDeleteProc.jsp?no='+no,
+						type:'GET',
+						dataType:'json',
+						success: function(data){
+							
+							if(data.result > 0){
+								alert('댓글이 삭제 되었습니다.');
+								
+								// 화면삭제
+								/* tag.parent().parent().hide(); 
+								이렇게 해도 되고
+								*/
+								tag.closest('article').hide();
+								// 이렇게 해도 됨 => 이거는 article요소를 포함하면서 가장 가까운 상위 요소를 선택하는 것
+							}
+						}																				
+					});
+				}
+			})
+			
+			
+			//수정하기
+			$(document).on('click', '.modify', function(e){
+				e.preventDefault();
+
+				let txt = $(this).text();
+				let p = $(this).parent().prev();
+				
+				if(txt == '수정'){
+					// 수정모드
+					$(this).text('수정완료'); // 수정 누르면 수정이 가능하고 수정완료 버튼으로 바뀌게 하려고 하는거
+					p.attr('contentEditable', true);
+					p.focus();
+					// 여기서 this는 .modify(내가 클릭한 수정 링크), p는 문서 객체
+				}else{
+					// 수정완료
+					$(this).text('수정'); // 다하고 수정완료 누르면 수정으로 바뀜
+					p.attr('contentEditable', false);
+					
+					let no = $(this).attr('data-no');
+					let content = p.text();
+					
+					let jsonData = {
+							"no": no,
+							"content": content
+					};
+					
+					$.ajax({
+						url: '/JBoard1/proc/commentModifyProc.jsp',
+						type: 'POST',
+						data: jsonData,
+						dataType: 'json',
+						success: function(data){
+							
+							if(data.result > 0){
+								alert('댓글이 수정되었습니다.');
+							}
+							
+						}
+					});
+					
+				}
+				// 서버로 수정내용 다시 보내려고
+
+			});
+			
+			// 댓글쓰기
 			$('.commentForm > form').submit(function(){
 			
 			// 밑에 jsonData에 pg, parent, content, uid를 넣기 위해 commentform에서 들고옴
@@ -67,8 +147,8 @@
 						article += "<span class='date'>"+data.date+"</span>";
 						article += "<p class='content'>"+data.content+"</p>";
 						article += "<div>";
-						article += "<a href='#' class='remove'>삭제</a>";
-						article += "<a href='#' class='modify'>수정</a>";
+						article += "<a href='#' class='remove' data-no='"+data.no+"'>삭제</a>";
+						article += "<a href='#' class='modify' data-no='"+data.no+"'>수정</a>";
 						article += "</div>";
 						article += "</article>";
 					
@@ -118,8 +198,8 @@
             <span class="date"><%= comment.getRdate() %></span>                    
             <p class="content"><%= comment.getContent() %></p>
             <div>
-                <a href="#" class="remove">삭제</a>
-                <a href="#" class="modify">수정</a>
+                <a href="#" class="remove" data-no="<%= comment.getNo() %>">삭제</a>
+                <a href="#" class="modify" data-no="<%= comment.getNo() %>">수정</a>
             </div>
         </article>
         <% } %>
