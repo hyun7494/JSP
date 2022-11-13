@@ -111,7 +111,7 @@
                 <td>강의장</td>
                 <td><input type="text" name="lecClass"></td>
             <tr>
-				<td colspan="2" align="right"><input type="submit" value="추가"/></td>
+				<td colspan="2" align="right"><input type="submit" class= "add" value="추가"/></td>
 			</tr>
            
         </table>

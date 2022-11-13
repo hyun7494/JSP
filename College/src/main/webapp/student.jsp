@@ -46,48 +46,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>    <script>
 
 	$(function(){
-		$('.open').on('click', function(){
-			$('.registerform').fadeIn(100);
-		  });
-		$('.close').on('click', function(){
-			$('.registerform').hide(100);
-		  });
 		
+		$('.open').click(function(){
+			
+			$('section').show();
+		});
+		
+		$('.close').click(function(){
+			$('section').hide();
+		});
 		
 		$('input[type=submit]').click(function(){
-            e.preventDefault();
-            // 입력 데이터 가져오기
-            let stdNo  = $('input[name=stdNo]').val();
-            let stdName = $('input[name=stdName]').val();
-            let stdHp   = $('input[name=stdHp]').val();
-            let stdYear  = $('input[name=stdYear]').val();
-            let stdAddress  = $('input[name=stdAddress]').val();
-
-            // 전송 데이터 생성(JSON)
-            let jsonData = {
-                "stdNo":stdNo,
-                "stdName":stdName,
-                "stdHp":stdHp,
-                "stdYear":stdYear
-                "stdAddress":stdAddress
-            };
-
-            console.log(jsonData);
-
-            // 데이터 전송                
-            $.ajax({
-                url: '/College/studentProc.jsp',
-                type: 'GET',
-                data: jsonData,
-                dataType: 'json',
-                success:function(data){
-                    alert('데이터 전송 성공!');
-                }
-            });
-            
-
-        });
-
+			
+			let stdNo = $('input[name=stdNo]').val();
+			let stdName = $('input[name=stdName]').val();
+			let stdHp = $('input[name=stdHp]').val();
+			let stdYear= $('input[name=stdYear]').val();
+			let stdAddress = $('input[name=stdAddress]').val();
+			
+			let jsonData = {
+					"stdNo": stdNo,
+					"stdName": stdName,
+					"stdHp": stdHp,
+					"stdYear": stdYear,
+					"stdAddress": stdAddress,
+			};
+			
+			console.log('jsonData')
+			
+			$.ajax({
+				url: './studentProc.jsp',
+				type: 'POST',
+				data: jsonData,
+				dataType: 'json',
+				success:function(data){
+					
+				}
+			});
+		});
 	});
 
 </script>
@@ -100,7 +96,7 @@
     <a href="./student.jsp">학생관리</a>
     
     <h4>학생목록</h4>
-    <input type="button" class="open" value="등록">
+    <button class="open">등록</button>
     	   
     <table border="1">
         <tr>
@@ -153,7 +149,7 @@
                 <td>주소</td>
                 <td><input type="text" name="stdAddress"></td>
             <tr>
-				<td colspan="2" align="right"><input type="submit" value="등록"/></td>
+				<td colspan="2" align="right"><input type="submit" class="btnAdd" value="등록"/></td>
 			</tr>
            
         </table>

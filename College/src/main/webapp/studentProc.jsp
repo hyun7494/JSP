@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.JsonObject"%>
 <%@page import="db.Sql"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="db.DBCP"%>
@@ -11,6 +12,8 @@
 	String stdHp  = request.getParameter("stdHp");
 	String stdYear  = request.getParameter("stdYear");
 	String stdAddress = request.getParameter("stdAddress");
+	
+	int result = 0;
 
 	// 데이터베이스 작업
 	try{
@@ -29,5 +32,10 @@
 	}catch(Exception e){
 		e.printStackTrace();
 	}
+	JsonObject json = new JsonObject();
+	json.addProperty("result", result);
+	
+	String jsonData = json.toString();
+	out.print(jsonData);
 	response.sendRedirect("/College/student.jsp");
 %>
