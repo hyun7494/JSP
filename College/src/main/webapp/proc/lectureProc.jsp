@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.JsonObject"%>
 <%@page import="db.Sql"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="db.DBCP"%>
@@ -12,6 +13,7 @@
 	String lecTime  = request.getParameter("lecTime");
 	String lecClass = request.getParameter("lecClass");
 
+	int result = 0;
 	// 데이터베이스 작업
 	try{
 		Connection conn = DBCP.getConnection();
@@ -22,12 +24,17 @@
 		psmt.setString(4, lecTime);
 		psmt.setString(5, lecClass);
 		
-		psmt.executeUpdate();
+		result = psmt.executeUpdate();
 		
 		psmt.close();
 		conn.close();		
 	}catch(Exception e){
 		e.printStackTrace();
 	}
+	JsonObject json = new JsonObject();
+	json.addProperty("result", result);
+	
+	String jsonData = json.toString();
+	out.print(jsonData);
 	response.sendRedirect("/College/lecture.jsp");
 %>

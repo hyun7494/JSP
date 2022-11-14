@@ -14,8 +14,8 @@
 	try{
 		Connection conn = DBCP.getConnection();
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM `lecture`");
-		
+		String sql = "SELECT * FROM `lecture`";
+		ResultSet rs = stmt.executeQuery(sql);		
 		lectures = new ArrayList<>();
 		
 		while(rs.next()){
@@ -35,7 +35,7 @@
 		
 	}catch(Exception e){
 		e.printStackTrace();
-	};
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,12 +47,44 @@
 
 	$(function(){
 		$('.open').on('click', function(){
-			$('.registerform').fadeIn(100);
+			$('.lectureform').fadeIn(100);
 		  });
 		$('.close').on('click', function(){
-			$('.registerform').hide(100);
+			$('.lectureform').hide(100);
 		  });
 
+		$('input[type=submit]').click(function(){
+			
+			let lecNo = $('input[name=lecNo]').val();
+			let lecName = $('input[name=lecName]').val();
+			let lecCredit = $('input[name=lecCredit]').val();
+			let lecTime= $('input[name=lecTime]').val();
+			let lecClass = $('input[name=lecClass]').val();
+			
+			let jsonData = {
+					"lecNo": lecNo,
+					"lecName": lecName,
+					"lecCredit": lecCredit,
+					"lecTime": lecTime,
+					"lecClass": lecClass,
+			};
+			
+			console.log('jsonData')
+			
+			$.ajax({
+				url: './proc/lectureProc.jsp',
+				type: 'POST',
+				data: jsonData,
+				dataType: 'json',
+				success:function(data){
+					if(data.result == 1 ){
+						alert('등록완료!');
+					}else{
+						alert('등록실패!');
+					}
+				}
+			});
+		});
 	});
 
 </script>
@@ -86,14 +118,14 @@
         	<% } %>
     </table>
 	
-	<section class="registerform" style="display:none">
+	<section class="lectureform" style="display:none">
     <h4>강좌등록</h4>
     <input type="button" class="close" value="닫기">
-    <form action="/College/lectureProc.jsp" method="post">
+    <form action="/College/proc/lectureProc.jsp" method="post">
         <table border="1">
             <tr>
                 <td>번호</td>
-                <td><input type="number" name="lecNo"></td>
+                <td><input type="text" name="lecNo"></td>
             </tr>
             <tr>
                 <td>강좌명</td>
@@ -101,17 +133,17 @@
             </tr>
             <tr>
                 <td>학점</td>
-                <td><input type="number" name="lecCredit"></td>
+                <td><input type="text" name="lecCredit"></td>
             </tr>
             <tr>
                 <td>시간</td>
-                <td><input type="number" name="lecTime"></td>
+                <td><input type="text" name="lecTime"></td>
             </tr>
             <tr>
                 <td>강의장</td>
                 <td><input type="text" name="lecClass"></td>
             <tr>
-				<td colspan="2" align="right"><input type="submit" class= "add" value="추가"/></td>
+				 <td colspan="2" align="right"> <button class="btnAdd">추가</button> </td>
 			</tr>
            
         </table>

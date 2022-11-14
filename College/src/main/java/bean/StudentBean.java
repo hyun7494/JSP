@@ -6,6 +6,7 @@ public class StudentBean {
 	private String stdHp;
 	private int stdYear;
 	private String stdAddress;
+	
 	public String getStdNo() {
 		return stdNo;
 	}

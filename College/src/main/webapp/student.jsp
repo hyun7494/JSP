@@ -117,7 +117,7 @@
         	<% } %>
     </table>
 	
-	<section class="registerform" style="display:none">
+	<section class="studentform" style="display:none">
     <h4>학생등록</h4>
     <input type="button" class="close" value="닫기">
     <form action="/College/studentProc.jsp" method="post">
