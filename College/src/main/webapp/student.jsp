@@ -14,7 +14,8 @@
 	try{
 		Connection conn = DBCP.getConnection();
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM `student`");
+		String sql = "SELECT * FROM `student`";
+		ResultSet rs = stmt.executeQuery(sql);
 		
 		students = new ArrayList<>();
 		
@@ -35,7 +36,7 @@
 		
 	}catch(Exception e){
 		e.printStackTrace();
-	};
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,11 +50,11 @@
 		
 		$('.open').click(function(){
 			
-			$('section').show();
+			$('.studentform').show();
 		});
 		
 		$('.close').click(function(){
-			$('section').hide();
+			$('.studentform').hide();
 		});
 		
 		$('input[type=submit]').click(function(){
@@ -75,7 +76,7 @@
 			console.log('jsonData')
 			
 			$.ajax({
-				url: './studentProc.jsp',
+				url: './proc/studentProc.jsp',
 				type: 'POST',
 				data: jsonData,
 				dataType: 'json',
@@ -96,7 +97,7 @@
     <a href="./student.jsp">학생관리</a>
     
     <h4>학생목록</h4>
-    <button class="open">등록</button>
+    <input type="button" class="open" value="등록">
     	   
     <table border="1">
         <tr>
@@ -120,7 +121,7 @@
 	<section class="studentform" style="display:none">
     <h4>학생등록</h4>
     <input type="button" class="close" value="닫기">
-    <form action="/College/studentProc.jsp" method="post">
+    <form action="/College/proc/studentProc.jsp" method="post">
         <table border="1">
             <tr>
                 <td>학번</td>

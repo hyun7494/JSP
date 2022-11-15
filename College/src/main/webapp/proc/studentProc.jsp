@@ -14,7 +14,6 @@
 	String stdAddress = request.getParameter("stdAddress");
 	
 	int result = 0;
-
 	// 데이터베이스 작업
 	try{
 		Connection conn = DBCP.getConnection();
@@ -25,7 +24,7 @@
 		psmt.setString(4, stdYear);
 		psmt.setString(5, stdAddress);
 		
-		psmt.executeUpdate();
+		result = psmt.executeUpdate();
 		
 		psmt.close();
 		conn.close();		
