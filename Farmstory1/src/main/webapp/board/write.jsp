@@ -8,7 +8,11 @@
 %>
         <main id="board" class="write">
             
-            <form action="#">
+            <form action="/Farmstory1/board/proc/writeProc.jsp" method="post">
+           <!-- 사용자가 변경하면 안되는 데이터들이라 input type hidden 사용 -->
+            	<input type="hidden" name="group" value="<%= group %>"/>
+            	<input type="hidden" name="cate" value="<%= cate %>"/>
+            	<input type="hidden" name="uid" value="<%= sessUser.getUid() %>"/>
                 <table border="0">
                     <caption>글쓰기</caption>
                     <tr>
@@ -26,7 +30,7 @@
                 </table>
 
                 <div>
-                    <a href="./list.jsp?group=<%= group %>&cate=<%= cate %>" class="btn btnCancel">취소</a>
+                     <a href="./list.jsp?group=<%= group %>&cate=<%= cate %>" class="btn btnCancel">취소</a>
                     <input type="submit" value="작성완료" class="btn btnComplete"/>
                 </div>
             </form>
