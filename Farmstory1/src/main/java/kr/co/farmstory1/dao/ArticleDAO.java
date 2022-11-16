@@ -2,6 +2,10 @@ package kr.co.farmstory1.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +43,71 @@ public class ArticleDAO {
 		}
 	}
 	public void selectArticle() {}
-	public void selectArticles() {}
+	public List<ArticleBean> selectArticles(String cate, int start) {
+		// 매개변수 선언
+		List<ArticleBean> articles = new ArrayList<>();
+		
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_ARTICLES);
+			psmt.setString(1, cate);
+			psmt.setInt(2, start);
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleBean ab = new ArticleBean();
+				ab.setNo(rs.getInt(1));
+				ab.setParent(rs.getInt(2));
+				ab.setComment(rs.getInt(3));
+				ab.setCate(rs.getString(4));
+				ab.setTitle(rs.getString(5));
+				ab.setContent(rs.getString(6));
+				ab.setFile(rs.getInt(7));
+				ab.setHit(rs.getInt(8));
+				ab.setUid(rs.getString(9));
+				ab.setRegip(rs.getString(10));
+				ab.setRdate(rs.getString(11));
+				ab.setNick(rs.getString(12));
+				
+				articles.add(ab);
+			}
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
 	public void updateArticle() {}
 	public void deleteArticle() {}
+	
+	public int selectCountTotal(String cate) {
+		
+		int total = 0;
+		
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL);
+			psmt.setString(1, cate);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			rs.close();
+			psmt.close();
+			conn.close();		
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return total;		
+	}
+	
 	
 }
