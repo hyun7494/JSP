@@ -14,7 +14,8 @@
 	try{
 		Connection conn = DBCP.getConnection();
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM `student`");
+		String sql = "SELECT * FROM `student`";
+		ResultSet rs = stmt.executeQuery(sql);
 		
 		students = new ArrayList<>();
 		
@@ -35,7 +36,7 @@
 		
 	}catch(Exception e){
 		e.printStackTrace();
-	};
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,48 +47,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>    <script>
 
 	$(function(){
-		$('.open').on('click', function(){
-			$('.registerform').fadeIn(100);
-		  });
-		$('.close').on('click', function(){
-			$('.registerform').hide(100);
-		  });
 		
+		$('.open').click(function(){
+			
+			$('.studentform').show();
+		});
+		
+		$('.close').click(function(){
+			$('.studentform').hide();
+		});
 		
 		$('input[type=submit]').click(function(){
-            e.preventDefault();
-            // 입력 데이터 가져오기
-            let stdNo  = $('input[name=stdNo]').val();
-            let stdName = $('input[name=stdName]').val();
-            let stdHp   = $('input[name=stdHp]').val();
-            let stdYear  = $('input[name=stdYear]').val();
-            let stdAddress  = $('input[name=stdAddress]').val();
-
-            // 전송 데이터 생성(JSON)
-            let jsonData = {
-                "stdNo":stdNo,
-                "stdName":stdName,
-                "stdHp":stdHp,
-                "stdYear":stdYear
-                "stdAddress":stdAddress
-            };
-
-            console.log(jsonData);
-
-            // 데이터 전송                
-            $.ajax({
-                url: '/College/studentProc.jsp',
-                type: 'GET',
-                data: jsonData,
-                dataType: 'json',
-                success:function(data){
-                    alert('데이터 전송 성공!');
-                }
-            });
-            
-
-        });
-
+			
+			let stdNo = $('input[name=stdNo]').val();
+			let stdName = $('input[name=stdName]').val();
+			let stdHp = $('input[name=stdHp]').val();
+			let stdYear= $('input[name=stdYear]').val();
+			let stdAddress = $('input[name=stdAddress]').val();
+			
+			let jsonData = {
+					"stdNo": stdNo,
+					"stdName": stdName,
+					"stdHp": stdHp,
+					"stdYear": stdYear,
+					"stdAddress": stdAddress,
+			};
+			
+			console.log('jsonData')
+			
+			$.ajax({
+				url: './proc/studentProc.jsp',
+				type: 'POST',
+				data: jsonData,
+				dataType: 'json',
+				success:function(data){
+					
+				}
+			});
+		});
 	});
 
 </script>
@@ -121,10 +118,10 @@
         	<% } %>
     </table>
 	
-	<section class="registerform" style="display:none">
+	<section class="studentform" style="display:none">
     <h4>학생등록</h4>
     <input type="button" class="close" value="닫기">
-    <form action="/College/studentProc.jsp" method="post">
+    <form action="/College/proc/studentProc.jsp" method="post">
         <table border="1">
             <tr>
                 <td>학번</td>
@@ -153,7 +150,7 @@
                 <td>주소</td>
                 <td><input type="text" name="stdAddress"></td>
             <tr>
-				<td colspan="2" align="right"><input type="submit" value="등록"/></td>
+				<td colspan="2" align="right"><input type="submit" class="btnAdd" value="등록"/></td>
 			</tr>
            
         </table>
