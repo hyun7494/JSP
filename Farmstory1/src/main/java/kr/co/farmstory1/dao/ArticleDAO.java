@@ -24,24 +24,61 @@ public class ArticleDAO {
 	}
 	private ArticleDAO() {}
 	
-	public void insertArticle(ArticleBean ab) {
+	public int insertArticle(ArticleBean ab) {
+		
+		int parent = 0;
+		
 		try {
 			Connection conn = DBCP.getConnection();
+			
+			Statement stmt = conn.createStatement();
 			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
+			
 			psmt.setString(1, ab.getCate());
 			psmt.setString(2, ab.getTitle());
 			psmt.setString(3, ab.getContent());
 			psmt.setInt(4, ab.getFile());
 			psmt.setString(5, ab.getUid());
 			psmt.setString(6, ab.getRegip());
-			psmt.executeUpdate();
 			
+			psmt.executeUpdate();
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_NO); // SELECT
+			
+			if(rs.next()){
+				parent = rs.getInt(1);				
+			}
+			
+			rs.close();
+			stmt.close();
 			psmt.close();
-			conn.close();			
+			conn.close();
+			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		return parent;
 	}
+	
+	public void insertFile(int parent, String newName, String fname) {
+		try{
+			logger.info("insertFile start...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
+			psmt.setInt(1, parent);
+			psmt.setString(2, newName);
+			psmt.setString(3, fname);
+			
+			psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+	}
+	
 	public ArticleBean selectArticle(String no) {
 		ArticleBean article = null;
 		
@@ -180,7 +217,26 @@ public class ArticleDAO {
 		return latests;
 		
 	}
-	public void updateArticle() {}
+	public void updateArticle(String no, String title, String content) {
+		
+		try{
+			logger.info("updateArticle start...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
+			psmt.setString(1, title);
+			psmt.setString(2, content);
+			psmt.setString(3, no);
+				
+			psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+	
+	}
 	public void deleteArticle() {}
 	
 	public int selectCountTotal(String cate) {

@@ -13,10 +13,9 @@ public class ArticleBean {
 	private String regip;
 	private String rdate;
 	
-	//추가 필드
+	// 추가 필드
 	private String nick;
 	private String fname;
-	
 	
 	public String getFname() {
 		return fname;
@@ -24,12 +23,38 @@ public class ArticleBean {
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
+	private int fno;
+	private String oriName;
+	private int download;
+	
+	public int getFno() {
+		return fno;
+	}
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+	
+	public String getOriName() {
+		return oriName;
+	}
+	public void setOriName(String oriName) {
+		this.oriName = oriName;
+	}
+	
+	public int getDownload() {
+		return download;
+	}
+	public void setDownload(int download) {
+		this.download = download;
+	}
+	
 	public String getNick() {
 		return nick;
 	}
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
+	
 	public int getNo() {
 		return no;
 	}
@@ -39,8 +64,12 @@ public class ArticleBean {
 	public int getParent() {
 		return parent;
 	}
+	// 메소드 오버로딩함
 	public void setParent(int parent) {
 		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
 	}
 	public int getComment() {
 		return comment;
@@ -96,6 +125,4 @@ public class ArticleBean {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
-	
 }

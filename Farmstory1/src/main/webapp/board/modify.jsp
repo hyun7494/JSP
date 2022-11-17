@@ -10,6 +10,8 @@
 	request.setCharacterEncoding("UTF-8");
 	String group = request.getParameter("group");
 	String cate  = request.getParameter("cate");
+	String pg = request.getParameter("pg");
+	String no = request.getParameter("no");
 	
 	ArticleBean article = ArticleDAO.getInstance().selectArticle(no);
 
@@ -18,13 +20,15 @@
 <main id="board" class="modify">
     
     <form action="/Farmstory1/board/proc/modifyProc.jsp" method="post">
-    <input type ="hidden" name="pg" value="<%= pg %>">
-	<input type ="hidden" name="no" value="<%= no %>">
+	    <input type="hidden" name="group" value="<%= group %>">
+	   	<input type="hidden" name="cate" value="<%= cate %>">
+	   	<input type="hidden" name="pg" value="<%= pg %>">
+	   	<input type="hidden" name="no" value="<%= no %>">
         <table border="0">
             <caption>글수정</caption>
             <tr>
                 <th>제목</th>
-                <td><input type="text" name="title" placeholder="제목을 입력하세요." value="<%= article.getTitle%>"/></td>
+                <td><input type="text" name="title" placeholder="제목을 입력하세요." value="<%= article.getTitle() %>"/></td>
             </tr>
             <tr>
                 <th>내용</th>
