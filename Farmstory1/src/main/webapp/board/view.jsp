@@ -5,7 +5,16 @@
 	String cate  = request.getParameter("cate");
 
 	pageContext.include("./_"+group+".jsp");
+	
+	
+	if(sessUser == null){
+		response.sendRedirect("/Farmstory1/user/login.jsp?success=101");
+		return;
+	}
 %>
+<script>
+
+</script>
         <main id="board" class="view">
             
             <table>

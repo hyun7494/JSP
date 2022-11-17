@@ -42,7 +42,46 @@ public class ArticleDAO {
 			logger.error(e.getMessage());
 		}
 	}
-	public void selectArticle() {}
+	public ArticleBean selectArticle(String no) {
+		ArticleBean article = null;
+		
+		try{
+			logger.info("selectArticle start...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_ARTICLE);
+			psmt.setString(1, no);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				article = new ArticleBean();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setComment(rs.getInt(3));
+				article.setCate(rs.getString(4));
+				article.setTitle(rs.getString(5));
+				article.setContent(rs.getString(6));
+				article.setFile(rs.getInt(7));
+				article.setHit(rs.getInt(8));
+				article.setUid(rs.getString(9));
+				article.setRegip(rs.getString(10));
+				article.setRdate(rs.getString(11));
+				article.setFno(rs.getInt(12));
+				article.setOriName(rs.getString(13));
+				article.setDownload(rs.getInt(14));
+			}
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+		
+		return article;
+	}
+	
 	public List<ArticleBean> selectArticles(String cate, int start) {
 		// 매개변수 선언
 		List<ArticleBean> articles = new ArrayList<>();
@@ -80,6 +119,66 @@ public class ArticleDAO {
 			logger.error(e.getMessage());
 		}
 		return articles;
+	}
+	public List<ArticleBean> selectLatest() {
+		
+		List<ArticleBean> latests = new ArrayList<>();
+		
+		try {
+			logger.debug("selectLatest");
+			
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_LATESTS);
+			
+			while(rs.next()) {
+				ArticleBean ab = new ArticleBean();
+				ab.setNo(rs.getInt(1));
+				ab.setTitle(rs.getString(2));
+				ab.setRdate(rs.getString(3).substring(2, 10));
+				latests.add(ab);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		logger.debug("latests size : " + latests.size());
+		return latests;
+	}
+	public List<ArticleBean> selectLatest(String cate) {
+
+		List<ArticleBean> latests = new ArrayList<>();
+		
+		try {
+			logger.debug("selectLatest");
+			
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_LATEST);
+			psmt.setString(1, cate);
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleBean ab = new ArticleBean();
+				ab.setNo(rs.getInt(1));
+				ab.setTitle(rs.getString(2));
+				ab.setRdate(rs.getString(3).substring(2, 10));
+				latests.add(ab);
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		logger.debug("latests size : " + latests.size());
+		return latests;
+		
 	}
 	public void updateArticle() {}
 	public void deleteArticle() {}

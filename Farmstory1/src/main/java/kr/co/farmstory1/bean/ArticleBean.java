@@ -15,8 +15,15 @@ public class ArticleBean {
 	
 	//추가 필드
 	private String nick;
+	private String fname;
 	
 	
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
 	public String getNick() {
 		return nick;
 	}
