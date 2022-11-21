@@ -1,7 +1,7 @@
-<%@page import="com.google.gson.Gson"%>
-<%@page import="kr.co.farmstory1.bean.ArticleBean"%>
-<%@page import="java.util.List"%>
-<%@page import="kr.co.farmstory1.dao.ArticleDAO"%>
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="kr.co.farmstory1.bean.ArticleBean"%>
+<%@ page import="java.util.List"%>
+<%@ page import="kr.co.farmstory1.dao.ArticleDAO"%>
 <%@ page contentType="application/json;charset=UTF-8" pageEncoding="UTF-8"%>
 <%	
 	request.setCharacterEncoding("UTF-8");
