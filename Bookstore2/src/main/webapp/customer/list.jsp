@@ -13,21 +13,21 @@
 		
 		<table border="1">
 			<tr>
-				<td>도서번호</td>
-				<td>도서명</td>
-				<td>출판사</td>
-				<td>가격</td>
+				<td>고객번호</td>
+				<td>이름</td>
+				<td>주소</td>
+				<td>휴대폰</td>
 				<td>관리</td>
 			</tr>
 			<c:forEach var="customer" items="${custs}">
 				<tr>
-					<td>${customer.getCustId()}</td>
+					<td>${customer.getCustID()}</td>
 					<td>${customer.getName()}</td>
 					<td>${customer.getAddress()}</td>
 					<td>${customer.getPhone()}</td>
 					<td>
-						<a href="/Bookstore2/modify.do?custId=${customer.custId}">수정</a>
-						<a href="/Bookstore2/delete.do?custId=${customer.custId}">삭제</a>
+						<a href="/Bookstore2/customer/modify.do?custID=${customer.custID}">수정</a>
+						<a href="/Bookstore2/customer/delete.do?custID=${customer.custID}">삭제</a>
 					</td>
 				</tr>
 			</c:forEach>

@@ -22,7 +22,7 @@
 				</tr>
 				<tr>
 					<td>휴대폰</td>
-					<td><input type="text" name="hp"></td>
+					<td><input type="text" name="phone"></td>
 				</tr>
 				<tr>
 					 <td colspan="2" align="right"> <button class="btnAdd">등록</button> </td>

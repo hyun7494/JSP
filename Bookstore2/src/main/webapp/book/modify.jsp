@@ -14,7 +14,7 @@
 		<table border="1">
 			<tr>
 				<td>도서번호</td>
-				<td><input type="text" name="bookID" readonly value="${requestScope.vo.bookId}"></td>
+				<td><input type="text" name="bookId" readonly value="${vo.bookId}"></td>
 			</tr>
 			<tr>
 				<td>도서명</td>
@@ -32,5 +32,6 @@
 				 <td colspan="2" align="right"> <button class="btnAdd">수정</button> </td>
 			</tr>
 		</table>
+		</form>
 	</body>
 </html>

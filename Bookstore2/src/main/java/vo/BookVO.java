@@ -6,11 +6,15 @@ public class BookVO {
 	private String bookName;
 	private String publisher;
 	private int price;
+	
 	public int getBookId() {
 		return bookId;
 	}
 	public void setBookId(int bookId) {
 		this.bookId = bookId;
+	}
+	public void setBookId(String bookId) {
+		this.bookId = Integer.parseInt(bookId);
 	}
 	public String getBookName() {
 		return bookName;
@@ -29,6 +33,9 @@ public class BookVO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public void setPrice(String price) {
+		this.price = Integer.parseInt(price);
 	}
 
 	

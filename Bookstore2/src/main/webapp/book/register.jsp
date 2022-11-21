@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<h3>도서등록</h3>
-		<a href="/Bookstore2/index.do">처음으로</a>
+		<a href="/Bookstore2/">처음으로</a>
 		<a href="/Bookstore2/book/list.do">도서목록</a>
 		
 		<form action="/Bookstore2/book/register.do" method="post">
@@ -29,7 +29,7 @@
 				<td><input type="text" name="price"></td>
 			</tr>
 			<tr>
-				 <td colspan="2" align="right"> <button class="btnAdd">등록</button> </td>
+				<td colspan="2" align="right"><input type="submit" value="등록"></td>
 			</tr>
 		</table>
 		</form>

@@ -2,16 +2,20 @@ package vo;
 
 public class CustomerVO {
 	
-	private int custId;
+	private int custID;
 	private String name;
 	private String address;
 	private String phone;
-	public int getCustId() {
-		return custId;
+	public int getCustID() {
+		return custID;
 	}
-	public void setCustId(int custId) {
-		this.custId = custId;
+	public void setCustID(int custID) {
+		this.custID = custID;
 	}
+	public void setCustID(String custID) {
+		this.custID = Integer.parseInt(custID);
+	}
+	
 	public String getName() {
 		return name;
 	}

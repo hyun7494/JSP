@@ -1,12 +1,10 @@
 package dao;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 import db.DBHelper;
 import vo.BookVO;
-import vo.CustomerVO;
 
 public class BookDAO extends DBHelper{
 	
@@ -21,11 +19,13 @@ public class BookDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement("INSERT INTO `book` VALUES (?, ?, ?, ?)");
+			psmt = conn. prepareStatement("INSERT INTO `book` VALUES (?,?,?,?)");
 			psmt.setInt(1, vo.getBookId());
 			psmt.setString(2, vo.getBookName());
 			psmt.setString(3, vo.getPublisher());
 			psmt.setInt(4, vo.getPrice());
+			
+			psmt.executeUpdate();
 			close();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -38,11 +38,11 @@ public class BookDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement("select * from `book` where `bookId`=?");
+			psmt = conn.prepareStatement("SELECT * FROM `book` WHERE `bookId`=?");
 			psmt.setString(1, bookId);
 			rs = psmt.executeQuery();
 			
-		while(rs.next()) {
+			if(rs.next()) {
 			vo = new BookVO();
 			vo.setBookId(rs.getInt(1));
 			vo.setBookName(rs.getString(2));
@@ -85,15 +85,26 @@ public class BookDAO extends DBHelper{
 		return books;
 	}
 	
-public void updateBook(BookVO vo) {
+	public void updateBook(BookVO vo) {
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement("update `book` set `bookName`=?, `publisher`=?, `price`=? where `bookId`=?");
+			psmt = conn.prepareStatement("UPDATE `book` SET `bookName`=?, `publisher`=?, `price`=? WHERE `bookId`=?");
 			psmt.setString(1, vo.getBookName());
 			psmt.setString(2, vo.getPublisher());
 			psmt.setInt(3, vo.getPrice());
 			psmt.setInt(4, vo.getBookId());
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void deleteBook(int bookId) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("delete from `book` where `bookId`=?");
+			psmt.setInt(1, bookId);
 			psmt.executeUpdate();
 			close();
 		}catch (Exception e) {

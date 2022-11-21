@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<h3>도서목록</h3>
-		<a href="/Bookstore2/index.jsp">처음으로</a>
+		<a href="/Bookstore2/">처음으로</a>
 		<a href="/Bookstore2/book/register.do">도서등록</a>
 		
 		<table border="1">
