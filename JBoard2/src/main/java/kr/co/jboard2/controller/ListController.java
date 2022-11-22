@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.jboard2.dao.UserDAO;
+
 @WebServlet("/list.do")
 public class ListController extends HttpServlet{
 	

@@ -4,7 +4,7 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="kr.co.jboard1.db.DBCP"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="./_header.jsp" %>
+<%@ include file="../_header.jsp" %>
 <script>
 	$(function(){
 		$('.next').click(function(){
@@ -69,4 +69,4 @@
     </p>            
 </main>
 
-<%@ include file="./_footer.jsp" %>
+<%@ include file="../_footer.jsp" %>

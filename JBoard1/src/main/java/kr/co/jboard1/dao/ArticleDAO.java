@@ -371,6 +371,7 @@ public String deleteFile(String parent) {
 			
 			ResultSet rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL);
 			
+			// rs 즉 결과가 있다면 첫번째 결과값을 total에 집어 넣어라
 			if(rs.next()) {
 				total = rs.getInt(1);
 			}

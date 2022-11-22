@@ -14,11 +14,8 @@ import com.google.gson.JsonObject;
 import kr.co.jboard2.dao.UserDAO;
 
 @WebServlet("/user/checkUid.do")
-public class CheckUidController extends HttpServlet{
-	
-	/**
-	 * 
-	 */
+public class CheckUidController extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 	@Override
 	public void init() throws ServletException {
@@ -27,9 +24,9 @@ public class CheckUidController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String uid = req.getParameter("uid");
-		
 		int result = UserDAO.getInstance().selectCountUid(uid);
 		
+		// JSON 출력
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
 		
@@ -39,5 +36,4 @@ public class CheckUidController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	}
-
 }

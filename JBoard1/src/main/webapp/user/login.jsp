@@ -3,7 +3,7 @@
 	request.setCharacterEncoding("utf-8");
 	String success = request.getParameter("success");
 %>
-<%@ include file="./_header.jsp" %>
+<%@ include file="../_header.jsp" %>
 <script>
 	let success = "<%=success%>";
 
@@ -38,5 +38,5 @@
         <a href="/JBoard1/user/terms.jsp">회원가입</a>
     </div>
 </main>
-<%@ include file="./_footer.jsp" %>
+<%@ include file="../_footer.jsp" %>
         
