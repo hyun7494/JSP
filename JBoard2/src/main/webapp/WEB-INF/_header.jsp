@@ -1,4 +1,13 @@
+<%@page import="kr.co.jboard2.vo.UserVO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	UserVO sessUser = (UserVO)session.getAttribute("sessUser");
+	
+	if(sessUser == null){
+		response.sendRedirect("/JBoard2/user/login.do?success=101");
+		return; // 처리종료
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

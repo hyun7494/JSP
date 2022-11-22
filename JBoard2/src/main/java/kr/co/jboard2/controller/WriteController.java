@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.jboard2.dao.ArticleDAO;
+import kr.co.jboard2.dao.UserDAO;
+import kr.co.jboard2.vo.ArticleVO;
+
 @WebServlet("/write.do")
 public class WriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,5 +29,22 @@ public class WriteController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		String uid = req.getParameter("uid");
+		String regip = req.getRemoteAddr();
+		String rdate = req.getParameter("rdate");
+		
+		ArticleVO vo = new ArticleVO();
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setUid(uid);
+		vo.setRegip(regip);
+		vo.getRdate();
+		
+		ArticleDAO.getInstance().insertArticle(vo);
+		
+		resp.sendRedirect("/JBoard2/write.do");
 	}
 }

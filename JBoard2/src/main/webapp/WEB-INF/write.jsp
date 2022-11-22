@@ -3,6 +3,7 @@
         <main id="board">
             <section class="write">
                 <form action="/JBoard2/write.do" method="post">
+                <input type="hidden" name="uid" value="<%= sessUser.getUid() %>"/>
                     <table border="0">
                         <caption>글쓰기</caption>
                         <tr>
