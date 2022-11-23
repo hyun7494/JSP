@@ -23,6 +23,7 @@ public class ArticleDAO extends DBHelper{
 			psmt.setString(1, vo.getTitle());
 			psmt.setString(2, vo.getContent());
 			psmt.setString(3, vo.getUid());
+			psmt.setString(4, vo.getRegip());
 
 			
 			psmt.executeUpdate();

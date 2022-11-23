@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.jboard2.dao.ArticleDAO;
-import kr.co.jboard2.dao.UserDAO;
 import kr.co.jboard2.vo.ArticleVO;
 
 @WebServlet("/write.do")
@@ -33,12 +32,14 @@ public class WriteController extends HttpServlet {
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String uid = req.getParameter("uid");
+		String regip   = req.getRemoteAddr();
 
 		
 		ArticleVO vo = new ArticleVO();
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setUid(uid);
+		vo.setRegip(regip);
 
 		
 		ArticleDAO.getInstance().insertArticle(vo);

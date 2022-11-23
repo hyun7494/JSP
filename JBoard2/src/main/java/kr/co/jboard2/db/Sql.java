@@ -28,7 +28,9 @@ public class Sql {
 	public static final String INSERT_ARTICLE = "insert into `board_article` set "
 												+ "`title`=?,"
 												+ "`content`=?,"
-												+ "`uid`=?";
+												+ "`uid`=?,"
+												+ "`rdate`=NOW(),"
+												+ "`regip`=?";
 
 		
 	public static final String INSERT_FILE = "insert into `board_file` set "
