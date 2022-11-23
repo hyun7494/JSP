@@ -15,19 +15,21 @@ public class Sql {
 												+ "`regip`=?,"
 												+ "`rdate`=NOW()";
 	
-	public static final String SELECT_USER       = "select * from `board_user` where `uid`=? and `pass`=SHA2(?, 256)";
-	public static final String SELECT_COUNT_UID  = "select count(`uid`) from `board_user` where `uid`=?";
-	public static final String SELECT_COUNT_NICK = "select count(`nick`) from `board_user` where `nick`=?";
-	public static final String SELECT_TERMS      = "select * from `board_terms`";
+	public static final String SELECT_USER       			= "select * from `board_user` where `uid`=? and `pass`=SHA2(?, 256)";
+	public static final String SELECT_COUNT_UID  			= "select count(`uid`) from `board_user` where `uid`=?";
+	public static final String SELECT_COUNT_NICK 			= "select count(`nick`) from `board_user` where `nick`=?";
+	public static final String SELECT_TERMS      			= "select * from `board_terms`";
+	public static final String SELECT_USER_FOR_FIND_ID      = "select `uid`, `name`, `email`, `rdate` from `board_user` where `name`=? and `email`=?";
+	public static final String SELECT_USER_FOR_FIND_PW      = "select count(`uid`) from `board_user` where `uid`=? and `email`=?";
+	
+	public static final String UPDATE_USER_PASSWORD = "update `board_user` set `pass`=SHA2(?, 256) where `uid`=?";
 	
 	// board
 	public static final String INSERT_ARTICLE = "insert into `board_article` set "
 												+ "`title`=?,"
 												+ "`content`=?,"
-												+ "`file`=?,"
-												+ "`uid`=?,"
-												+ "`regip`=?,"
-												+ "`rdate`=NOW()";
+												+ "`uid`=?";
+
 		
 	public static final String INSERT_FILE = "insert into `board_file` set "
 											+ "`parent`=?,"

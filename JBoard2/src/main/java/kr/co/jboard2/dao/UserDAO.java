@@ -1,4 +1,4 @@
-package kr.co.jboard2.dao;
+	package kr.co.jboard2.dao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -154,7 +154,85 @@ public class UserDAO extends DBHelper {
 	
 	
 	public void selectUsers() {}
+	
+	public UserVO selectUserForFindId(String name, String email) {
+		
+		UserVO vo = null;
+		try {
+			logger.info("selectUserForFindId start...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_USER_FOR_FIND_ID);
+			psmt.setString(1, name);
+			psmt.setString(2, email);
+			rs = psmt.executeQuery();
+			// 매핑할것 두개니까
+			
+			if(rs.next()) {
+				vo = new UserVO();
+				vo.setUid(rs.getString(1));
+				vo.setName(rs.getString(2));
+				vo.setEmail(rs.getString(3));
+				vo.setRdate(rs.getString(4));
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+		
+	}
+	
+public int selectUserForFindPw(String uid, String email) {
+		
+		int result = 0;
+		
+		try {
+			logger.info("selectUserForFindPw start...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_USER_FOR_FIND_PW);
+			psmt.setString(1, uid);
+			psmt.setString(2, email);
+			rs = psmt.executeQuery();
+			// 매핑할것 두개니까
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+		
+	}
+	
 	public void updateUser() {}
+public int updateUserPassword(String uid, String pass) {
+		
+		int result = 0;
+		try {
+			logger.info("updateUserPassword...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_USER_PASSWORD);
+			psmt.setString(1, pass);
+			psmt.setString(2, uid);
+			result = psmt.executeUpdate();
+			
+			close();			
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 	public void deleteUser() {}
+	
+	
 
 }

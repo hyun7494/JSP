@@ -14,13 +14,14 @@ let regPass  = /^.*(?=^.{5,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 // 폼 데이터 검증 결과 상태변수
 let isUidOk   = false;
 let isPassOk  = false;
+let isPassMatch = false;
 let isNameOk  = false;
 let isNickOk  = false;
 let isEmailOk = false;
 let isHpOk    = false;
 let isEmailAuthOk = false;
-let isEmailAuthCodeOk = false;
 let receivedCode = 0;	
+let preventDoubleClick = false;
 
 $(function(){
 	
@@ -175,12 +176,12 @@ $(function(){
 			return;
 		}
 		
-		if(isEmailAuthOk){
+		if(preventDoubleClick){
 			console.log('here2');
 			return;
 		}
 		
-		isEmailAuthOk = true;
+		preventDoubleClick = true;
 		
 		$('.resultEmail').text('인증코드 전송 중 입니다. 잠시만 기다리세요...');
 		console.log('here3');
@@ -227,12 +228,12 @@ $(function(){
 		}
 		
 		if(code == receivedCode){
-			isEmailAuthCodeOk = true;
+			isEmailAuthOk = true;
 			$('input[name=email]').attr('readonly', true);
 			$('.resultEmail').text('이메일이 인증 되었습니다.');				
 			$('.auth').hide();
 		}else{
-			isEmailAuthCodeOk = false;
+			isEmailAuthOk = false;
 			alert('인증코드가 틀립니다.\n다시 확인 하십시요.');
 		}
 	});

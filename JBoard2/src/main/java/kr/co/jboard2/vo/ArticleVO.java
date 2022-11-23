@@ -4,7 +4,6 @@ public class ArticleVO {
 	private String title;
 	private String content;
 	private String uid;
-	private String regip;
 	
 	public String getTitle() {
 		return title;
@@ -23,12 +22,6 @@ public class ArticleVO {
 	}
 	public void setUid(String uid) {
 		this.uid = uid;
-	}
-	public String getRegip() {
-		return regip;
-	}
-	public void setRegip(String regip) {
-		this.regip = regip;
 	}
 	public String getRdate() {
 		return rdate;

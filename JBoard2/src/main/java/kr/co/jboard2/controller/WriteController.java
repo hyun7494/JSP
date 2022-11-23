@@ -33,18 +33,16 @@ public class WriteController extends HttpServlet {
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String uid = req.getParameter("uid");
-		String regip = req.getRemoteAddr();
-		String rdate = req.getParameter("rdate");
+
 		
 		ArticleVO vo = new ArticleVO();
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setUid(uid);
-		vo.setRegip(regip);
-		vo.getRdate();
+
 		
 		ArticleDAO.getInstance().insertArticle(vo);
 		
-		resp.sendRedirect("/JBoard2/write.do");
+		resp.sendRedirect("/JBoard2/list.do");
 	}
 }

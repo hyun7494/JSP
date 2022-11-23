@@ -25,6 +25,10 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/login.jsp");
 		dispatcher.forward(req, resp);
+		
+		//id 찾기를 한 경우
+		HttpSession sess = req.getSession();
+		sess.removeAttribute("sessUserForFindId");
 	}
 	
 	@Override
