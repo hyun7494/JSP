@@ -1,4 +1,28 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.co.jboard2.vo.ArticleVO"%>
+<%@page import="kr.co.jboard2.dao.ArticleDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String no = request.getParameter("no");
+	String pg = request.getParameter("pg");
+// 서버에서 실행 ------------------------------------------
+
+	// DAO 객체 가져오기
+	ArticleDAO dao = ArticleDAO.getInstance();
+	
+	// 글 조회수 카운트 +1
+	dao.updateArticleHit(no);
+	
+	// 글 가져오기
+	ArticleVO vo = dao.selectArticle(no);
+	
+	// 댓글 가져오기
+	List<ArticleVO> comments = dao.selectComments(no);
+	
+// --------------------------------------------------------------
+
+%>
 <jsp:include page="./_header.jsp"/>
         <main id="board">
             <section class="view">
@@ -7,12 +31,14 @@
                     <caption>글보기</caption>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" name="title" value="제목입니다." readonly/></td>
+                        <td><input type="text" name="title" value="${vo.title}" readonly/></td>
                     </tr>
+                    <% if(vo.getfile() > 0){ %>
                     <tr>
                         <th>파일</th>
                         <td><a href="#">2020년 상반기 매출자료.xls</a>&nbsp;<span>7</span>회 다운로드</td>
                     </tr>
+                    <% } %>
                     <tr>
                         <th>내용</th>
                         <td>
@@ -22,9 +48,9 @@
                 </table>
                 
                 <div>
-                    <a href="#" class="btn btnRemove">삭제</a>
-                    <a href="./modify.html" class="btn btnModify">수정</a>
-                    <a href="./list.html" class="btn btnList">목록</a>
+                    <a href="/JBoard2/remove.do" class="btn btnRemove">삭제</a>
+                    <a href="/JBoard2/modify.do" class="btn btnModify">수정</a>
+                    <a href="/JBoard2/list.do" class="btn btnList">목록</a>
                 </div>
 
                 <!-- 댓글목록 -->

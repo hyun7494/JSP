@@ -184,7 +184,7 @@ public class UserDAO extends DBHelper {
 		
 	}
 	
-public int selectUserForFindPw(String uid, String email) {
+	public int selectUserForFindPw(String uid, String email) {
 		
 		int result = 0;
 		
@@ -210,9 +210,45 @@ public int selectUserForFindPw(String uid, String email) {
 		return result;
 		
 	}
+
+	public UserVO selectUserBySessId(String sessId) {
+		
+		UserVO vo = null;
+		
+		try {
+			logger.info("selectUserBySessId...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_USER_BY_SESSID);
+			psmt.setString(1, sessId);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new UserVO();
+				vo.setUid(rs.getString(1));
+				vo.setPass(rs.getString(2));
+				vo.setName(rs.getString(3));
+				vo.setNick(rs.getString(4));
+				vo.setEmail(rs.getString(5));
+				vo.setHp(rs.getString(6));
+				vo.setGrade(rs.getInt(7));
+				vo.setZip(rs.getString(8));
+				vo.setAddr1(rs.getString(9));
+				vo.setAddr2(rs.getString(10));
+				vo.setRegip(rs.getString(11));
+				vo.setRdate(rs.getString(12));
+			}
+			close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
 	
 	public void updateUser() {}
-public int updateUserPassword(String uid, String pass) {
+	public int updateUserPassword(String uid, String pass) {
 		
 		int result = 0;
 		try {
@@ -231,6 +267,35 @@ public int updateUserPassword(String uid, String pass) {
 		}
 		return result;
 	}
+
+	public void updateUserForSession(String uid, String sessId) {
+		try {
+			logger.info("updateUserForSession...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_USER_FOR_SESSION);
+			psmt.setString(1, sessId);
+			psmt.setString(2, uid);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public void updateUserForSessionOut(String uid) {
+		
+		try {
+			logger.info("updateUserForSessionOut...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_USER_FOR_SESSION_OUT);
+			psmt.setString(1, uid);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	public void deleteUser() {}
 	
 	

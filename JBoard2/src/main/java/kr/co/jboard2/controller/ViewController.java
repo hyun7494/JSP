@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.jboard2.dao.ArticleDAO;
+import kr.co.jboard2.vo.ArticleVO;
+
 @WebServlet("/view.do")
 public class ViewController extends HttpServlet{
 	
@@ -26,6 +29,7 @@ public class ViewController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 	}
 
 }
