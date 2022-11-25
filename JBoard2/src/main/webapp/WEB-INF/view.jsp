@@ -15,7 +15,7 @@
 	dao.updateArticleHit(no);
 	
 	// 글 가져오기
-	ArticleVO vo = dao.selectArticle(no);
+	ArticleVO vo = dao.seselectArticle();
 	
 	// 댓글 가져오기
 	List<ArticleVO> comments = dao.selectComments(no);
@@ -33,23 +33,25 @@
                         <th>제목</th>
                         <td><input type="text" name="title" value="${vo.title}" readonly/></td>
                     </tr>
-                    <% if(vo.getfile() > 0){ %>
+                    <% if(vo.getFile() > 0){ %>
                     <tr>
                         <th>파일</th>
-                        <td><a href="#">2020년 상반기 매출자료.xls</a>&nbsp;<span>7</span>회 다운로드</td>
+                        <td><a href="/JBoard2/download.do?fno=<%= vo.getFno() %>"><%= vo.getOriName() %></a>&nbsp;<span><%= vo.getDownload() %></span>회 다운로드</td>
                     </tr>
                     <% } %>
                     <tr>
                         <th>내용</th>
                         <td>
-                            <textarea name="content" readonly>내용 샘플입니다.</textarea>
+                            <textarea name="content" readonly><%= vo.getContent() %></textarea>
                         </td>
                     </tr>                    
                 </table>
                 
                 <div>
+                <% if(sessUser.getUid().equals(vo.getUid())){ %>
                     <a href="/JBoard2/remove.do" class="btn btnRemove">삭제</a>
                     <a href="/JBoard2/modify.do" class="btn btnModify">수정</a>
+                <% } %>
                     <a href="/JBoard2/list.do" class="btn btnList">목록</a>
                 </div>
 
