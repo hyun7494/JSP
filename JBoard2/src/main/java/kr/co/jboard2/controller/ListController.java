@@ -48,6 +48,7 @@ public class ListController extends HttpServlet  {
 		// 글 가져오기
 		List<ArticleVO> articles = service.selectArticles(start);
 		
+		req.setAttribute("pg", pg);
 		req.setAttribute("articles", articles);
 		req.setAttribute("lastPageNum", lastPageNum);		
 		req.setAttribute("currentPage", currentPage);		

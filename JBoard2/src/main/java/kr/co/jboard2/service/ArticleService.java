@@ -26,6 +26,7 @@ public enum ArticleService {
 	public void insertFile(int parent, String newName, String fname) {
 		dao.insertFile(parent, newName, fname);
 	}
+	
 	public int selectCountTotal() {
 		return dao.selectCountTotal();
 	}
@@ -36,8 +37,15 @@ public enum ArticleService {
 	public List<ArticleVO> selectArticles(int start) {
 		return dao.selectArticles(start);
 	}
-	public void updateArticle() {}
-	public void deleteArticle() {}
+	
+	
+	
+	public void updateArticle(String no, String title, String content) {
+		dao.updateArticle(no, title, content);
+	}
+	public void deleteArticle() {
+		
+	}
 	
 	public MultipartRequest uploadFile(HttpServletRequest req, String path) throws IOException {
 		int maxSize = 1024 * 1024 * 10; // 최대 파일 업로드 허용량 10MB
@@ -65,11 +73,12 @@ public enum ArticleService {
 		
 		int lastPageNum = 0;
 		
-		if(total % 10 == 0) {
+		if(total % 10 == 0){
 			lastPageNum = total / 10;
-		}else {
-			lastPageNum = total / 10+1;
+		}else{
+			lastPageNum = total / 10 + 1;
 		}
+		
 		return lastPageNum;
 	}
 	

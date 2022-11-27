@@ -156,9 +156,7 @@ public class ArticleDAO extends DBHelper {
 				article.setDownload(rs.getInt(14));
 			}
 			
-			rs.close();
-			psmt.close();
-			conn.close();
+			close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

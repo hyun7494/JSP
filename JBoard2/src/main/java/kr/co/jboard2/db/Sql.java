@@ -59,14 +59,12 @@ public class Sql {
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
 	
-	public static final String SELECT_ARTICLE = "SELECT `board_article` WHERE `no`=?";
-	/*
-	 * 	public static final String SELECT_ARTICLE = "SELECT a.*, b.`fno`, b.`oriName`, b.`download` "
+	public static final String SELECT_ARTICLE = "SELECT a.*, b.`fno`, b.`oriName`, b.`download` "
 												+ "FROM `board_article` AS a "
-												+ "LEFT JOIN `board_file` AS b "
-												+ "ON	a.`no` = b.`parent` "
+												+ "left JOIN `board_file` AS b "
+												+ "ON a.`no`=b.`parent` "
 												+ "WHERE `no`=?";
-	 */
+
 	
 	public static final String SELECT_FILE = "select * from `board_file` where `fno`=?";
 	public static final String SELECT_FILE_WITH_PARENT = "select * from `board_file` where `parent`=?";
