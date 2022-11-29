@@ -1,4 +1,11 @@
+<%@page import="vo.UserVO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String success = request.getParameter("success");
+
+	UserVO sessUser = (UserVO) session.getAttribute("sessUser");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,12 +37,21 @@
     <div id="wrapper">
         <header>
             <a href="/Farmstory2/index.do" class="logo"><img src="/Farmstory2/img/logo.png" alt="로고"/></a>
+            <% if(sessUser != null){ %>
+            <p>
+                <span>${sessUser.nick}</span>님 반갑습니다.
+                <a href="/Farmstory2/index.do">HOME |</a>
+                <a href="/Farmstory2/board/list.do">고객센터 |</a>
+                <a href="/JBoard2/user/logout.do?uid=${sessUser.uid}">[로그아웃]</a>
+            </p>
+            <% }else{ %>
             <p>
                 <a href="/Farmstory2/index.do">HOME |</a>
                 <a href="/Farmstory2/user/login.do">로그인 |</a>
                 <a href="/Farmstory2/user/terms.do">회원가입 |</a>
                 <a href="/Farmstory2/board/list.do">고객센터</a>
             </p>
+            <% } %>
             <img src="/Farmstory2/img/head_txt_img.png" alt="3만원 이상 무료배송"/>
             
             <ul class="gnb">

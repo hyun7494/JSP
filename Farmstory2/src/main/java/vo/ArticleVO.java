@@ -1,4 +1,4 @@
-package kr.co.farmstory2.db;
+package vo;
 
 public class ArticleVO {
 

@@ -34,7 +34,7 @@ $(function(){
 			console.log('here4');
 			
 			$.ajax({
-				url: '/JBoard2/user/emailAuth.do',
+				url: '/Farmstory2/user/emailAuth.do',
 				method: 'GET',
 				data: {"email": email},
 				dataType: 'json',
