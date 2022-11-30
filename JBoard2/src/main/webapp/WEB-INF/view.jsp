@@ -12,13 +12,13 @@
                       <c:if test="${article.file > 0}">
                     <tr>
                         <th>파일</th>
-                        <td><a href="#">${article.oriName }</a>&nbsp;<span>${article.download}</span>회 다운로드</td>
+                        <td><a href="#">${article.oriName}</a>&nbsp;<span>${article.download}</span>회 다운로드</td>
                     </tr>
                      </c:if>
                     <tr>
                         <th>내용</th>
                         <td>
-                            <textarea name="content" readonly>${article.content }</textarea>
+                            <textarea name="content" readonly>${article.content}</textarea>
                         </td>
                     </tr>                    
                 </table>

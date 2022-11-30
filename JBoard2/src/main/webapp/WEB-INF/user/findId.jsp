@@ -10,7 +10,7 @@
 			
 			console.log('here1 : ' + isEmailAuthOk);
 			
-			if(!isEmailAuthOk){
+			if(isEmailAuthOk){
 				console.log('here2');
 				let name = $('input[name=name]').val();
 				let email = $('input[name=email]').val();

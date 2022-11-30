@@ -31,6 +31,11 @@ public enum ArticleService {
 		return dao.selectCountTotal();
 	}
 	
+	public int selectCountTotalForSearch(String keyword) {
+		return dao.selectCountTotalForSearch(keyword);
+	}
+	
+	
 	public ArticleVO selectArticle(String no) {
 		return dao.selectArticle(no);
 	}
@@ -38,14 +43,12 @@ public enum ArticleService {
 		return dao.selectArticles(start);
 	}
 	
-	
-	
-	public void updateArticle(String no, String title, String content) {
-		dao.updateArticle(no, title, content);
+	public List<ArticleVO> selectArticleByKeyword(String keyword, int start) {
+		return dao.selectArticleByKeyword(keyword, start);
 	}
-	public void deleteArticle() {
-		
-	}
+	
+	public void updateArticle() {}
+	public void deleteArticle() {}
 	
 	public MultipartRequest uploadFile(HttpServletRequest req, String path) throws IOException {
 		int maxSize = 1024 * 1024 * 10; // 최대 파일 업로드 허용량 10MB

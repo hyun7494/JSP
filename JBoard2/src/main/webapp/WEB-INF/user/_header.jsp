@@ -1,4 +1,8 @@
+<%@page import="kr.co.jboard2.vo.UserVO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	UserVO sessUser = (UserVO)session.getAttribute("sessUser");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

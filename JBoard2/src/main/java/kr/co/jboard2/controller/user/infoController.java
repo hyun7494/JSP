@@ -1,6 +1,7 @@
 package kr.co.jboard2.controller.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,12 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.JsonObject;
+
+import kr.co.jboard2.dao.UserDAO;
 import kr.co.jboard2.vo.UserVO;
 
-
-@WebServlet("/user/findIdResult.do")
-public class FindIdResultController extends HttpServlet{
-	
+@WebServlet("/user/info.do")
+public class infoController extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -25,22 +27,26 @@ public class FindIdResultController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		HttpSession sess = req.getSession();
-		UserVO vo = (UserVO) sess.getAttribute("sessUserForFindId");
-		
-		/*
-		String name = req.getParameter("name");
-		String email = req.getParameter("email");
-		
-		select로 다시 조회해도 됨
-		*/
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/findIdResult.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/info.jsp");
 		dispatcher.forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String uid = req.getParameter("uid");
+		String pass = req.getParameter("pass");
+		
+		int result = UserDAO.getInstance().selectUserForUpdate(uid, pass);
+		
+		// JSON 출력
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
+	
 	}
 
 }
+	
+	

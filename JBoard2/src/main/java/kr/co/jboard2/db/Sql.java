@@ -20,9 +20,18 @@ public class Sql {
 	public static final String SELECT_COUNT_NICK = "select count(`nick`) from `board_user` where `nick`=?";
 	public static final String SELECT_TERMS      = "select * from `board_terms`";
 	public static final String SELECT_USER_FOR_FIND_ID = "select `uid`, `name`, `email`, `rdate` from `board_user` where `name`=? and `email`=?";
-	public static final String SELECT_USER_FOR_FIND_PW = "select count(`uid`) from `board_user` where `uid`=? and `email`=?";
+	public static final String SELECT_USER_FOR_FIND_PW = "select  count(`uid`) from `board_user` where `uid`=? and `email`=?";
 	public static final String SELECT_USER_BY_SESSID = "SELECT * FROM `board_user` WHERE `sessId`=? AND `sessLimitDate` > NOW()";
+	public static final String SELECT_USER_FOR_UPDATE = "select count(`uid`) from `board_user` where `uid`=? and `pass`=SHA2(?, 256)";
 
+	public static final String UPDATE_USER      = "update `board_user` set "
+												+ "`name`=?,"
+												+ "`nick`=?,"
+												+ "`email`=?,"
+												+ "`hp`=?,"
+												+ "`zip`=?,"
+												+ "`addr1`=?,"
+												+ "`addr2`=?";
 	public static final String UPDATE_USER_PASSWORD = "update `board_user` set `pass`=SHA2(?, 256) where `uid`=?";
 	public static final String UPDATE_USER_FOR_SESSION = "update `board_user` set `sessId`=?, `sessLimitDate` = DATE_ADD(NOW(), INTERVAL 3 DAY) where `uid`=?";
 	public static final String UPDATE_USER_FOR_SESSION_OUT = "update `board_user` set `sessId`=NULL, `sessLimitDate`=NULL where `uid`=?";
@@ -53,6 +62,13 @@ public class Sql {
 	
 	public static final String SELECT_MAX_NO = "select max(`no`) from `board_article`";
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `board_article` where `parent`=0";	
+	public static final String SELECT_COUNT_TOTAL_FOR_SEARCH = "SELECT COUNT(`no`) FROM `board_article` AS a "
+															+ "JOIN `board_user` AS b "
+															+ "ON a.uid= b.uid"
+															+ "WHERE `parent`=0 AND"
+															+ "(`title` LIKE '%?%' OR "
+															+ "	`nick` LIKE '%?%');";
+	
 	public static final String SELECT_ARTICLES = "SELECT a.*, b.`nick` FROM `board_article` AS a "
 												+ "JOIN `board_user` AS b ON a.uid = b.uid "
 												+ "WHERE `parent` = 0 "
@@ -64,7 +80,14 @@ public class Sql {
 												+ "left JOIN `board_file` AS b "
 												+ "ON a.`no`=b.`parent` "
 												+ "WHERE `no`=?";
-
+	
+	public static final String SELECT_ARTICLE_BY_KEYWORD = "SELECT a.*, b.nick FROM `board_article` AS a "
+														+ "JOIN `board_user` AS b "
+														+ "ON a.uid = b.uid "
+														+ "WHERE "
+														+ "	`parent`=0 AND "
+														+ "	(`title` LIKE '%?%' OR "
+														+ "	`nick` LIKE '%?%')";
 	
 	public static final String SELECT_FILE = "select * from `board_file` where `fno`=?";
 	public static final String SELECT_FILE_WITH_PARENT = "select * from `board_file` where `parent`=?";
@@ -75,7 +98,6 @@ public class Sql {
 	public static final String SELECT_COMMENT_LATEST = "SELECT a.*, b.nick FROM `board_article` AS a "
 														+ "JOIN `board_user` AS b USING(`uid`) "
 														+ "WHERE `parent` != 0 ORDER BY `no` DESC LIMIT 1";
-	
 	public static final String UPDATE_ARTICLE = "update `board_article` set "
 												+ "`title`=?, `content`=?, `rdate`=NOW() "
 												+ "where `no`=?";

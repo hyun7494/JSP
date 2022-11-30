@@ -19,20 +19,18 @@ import org.slf4j.LoggerFactory;
 import kr.co.jboard2.dao.UserDAO;
 import kr.co.jboard2.vo.UserVO;
 
-@WebFilter("/*")
-public class AutoLoginFilter implements Filter{
+public class AutoLoginFilter implements Filter {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		logger.info("LoginFilter...");
+		logger.info("AutoLoginFilter...");
 		
 		HttpServletRequest req = (HttpServletRequest)request;
-		HttpSession sess = ((HttpServletRequest)request).getSession();
+		HttpSession sess = req.getSession();
 		sess.removeAttribute("sessUserForfindId");
-		// ServletRequest랑 HttpServletRequest 타입이 달라서
 		
 		// 자동로그인 여부에 따라 로그인 처리
 		Cookie[] cookies = req.getCookies();
@@ -54,8 +52,7 @@ public class AutoLoginFilter implements Filter{
 			}
 		}
 		
-		// 다음 필터로 이동
+		// 다음 필터로 이동 
 		chain.doFilter(request, response);
-		
 	}
 }

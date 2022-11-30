@@ -79,6 +79,32 @@ public class UserDAO extends DBHelper {
 		return vo;
 	}
 	
+public int selectUserForUpdate(String uid, String pass) {
+		
+		int result = 0; 
+	
+	try {
+		logger.info("selectUserForFindId start...");
+		
+		conn = getConnection();
+		psmt = conn.prepareStatement(Sql.SELECT_USER_FOR_UPDATE);
+		
+		psmt.setString(1, uid);
+		psmt.setString(2, pass);
+		rs = psmt.executeQuery();
+		// 매핑할것 두개니까
+		
+		if(rs.next()) {
+			result = rs.getInt(1);
+		}
+		
+		close();
+	}catch(Exception e) {
+		logger.error(e.getMessage());
+	}
+	return result;
+	}
+	
 	public TermsVO selectTerms() {
 		TermsVO vo = null;
 		try {
@@ -92,10 +118,7 @@ public class UserDAO extends DBHelper {
 				vo = new TermsVO();
 				vo.setTerms(rs.getString(1));
 				vo.setPrivacy(rs.getString(2));
-				
-				
 			}
-			
 			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
@@ -247,7 +270,28 @@ public class UserDAO extends DBHelper {
 		return vo;
 	}
 	
-	public void updateUser() {}
+	public void updateUser(UserVO vo) {
+		try {
+			logger.info("updateUser start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_USER);
+			
+			psmt.setString(1, vo.getName());
+			psmt.setString(2, vo.getNick());
+			psmt.setString(3, vo.getEmail());
+			psmt.setString(4, vo.getHp());
+			psmt.setString(5, vo.getZip());
+			psmt.setString(6, vo.getAddr1());
+			psmt.setString(7, vo.getAddr2());
+			
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	public int updateUserPassword(String uid, String pass) {
 		
 		int result = 0;
