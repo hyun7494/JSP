@@ -52,7 +52,7 @@ $(function(){
 		setTimeout(()=>{
 			
 			$.ajax({
-				url: '/Farmstory2/user/checkUid.do',
+				url: '/JBoard2/user/checkUid.do',
 				method: 'get',
 				data: jsonData,
 				dataType: 'json',
@@ -172,7 +172,7 @@ $(function(){
 		console.log('here1 : ' + email);
 		
 		if(email == ''){
-			alert('이미엘을 입력 하세요.');
+			alert('이메일을 입력 하세요.');
 			return;
 		}
 		
@@ -190,7 +190,7 @@ $(function(){
 			console.log('here4');
 			
 			$.ajax({
-				url: '/Farmstory2/user/emailAuth.do',
+				url: '/JBoard2/user/emailAuth.do',
 				method: 'GET',
 				data: {"email": email},
 				dataType: 'json',

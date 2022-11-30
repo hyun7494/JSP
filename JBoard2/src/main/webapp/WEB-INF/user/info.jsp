@@ -26,7 +26,7 @@
 							if(data.result == 1){
 								location.href = "/JBoard2/user/myInfo.do";
 							}else{
-								alert('해당하는 사용자가 존재하지 않습니다.\n아이디와 이메일을 다시 확인하십시요.');
+								alert('비밀번호가 일치하지 않습니다');
 							}
 							
 						}
