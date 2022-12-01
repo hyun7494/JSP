@@ -43,15 +43,38 @@ public class myInfoController extends HttpServlet{
 		
 		String uid = req.getParameter("uid");
 		String pass = req.getParameter("pass");
+		String name = req.getParameter("name");
+		String nick = req.getParameter("nick");
+		String email = req.getParameter("email");
+		String hp = req.getParameter("hp");
+		String zip = req.getParameter("zip");
+		String addr1 = req.getParameter("addr1");
+		String addr2 = req.getParameter("addr2");
+		UserVO vo = new UserVO();
+		UserDAO dao = UserDAO.getInstance();
 		
-		int result = UserDAO.getInstance().updateUserPassword(uid, pass);
-		
-		// JSON 출력
-		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
-		
-		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
+		if(pass == null) {
+			// 비밀번호 안넣었으니
+			vo.setUid(uid);
+			vo.setName(name);
+			vo.setNick(nick);
+			vo.setEmail(email);
+			vo.setHp(hp);
+			vo.setZip(zip);
+			vo.setAddr1(addr1);
+			vo.setAddr2(addr2);
+			dao.updateUser(vo);
+			
+			resp.sendRedirect("/JBoard2/user/login.do");
+		}else{
+			// 비밀번호 수정
+			int result = dao.updateUserPassword(pass, uid);
+			
+			JsonObject json = new JsonObject();
+			json.addProperty("result", result);
+			PrintWriter out = resp.getWriter();
+			out.print(json.toString());
+		}
 		
 
 	}

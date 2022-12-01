@@ -292,7 +292,7 @@ public int selectUserForUpdate(String uid, String pass) {
 		}
 	}
 	
-	public int updateUserPassword(String uid, String pass) {
+	public int updateUserPassword(String pass, String uid) {
 		
 		int result = 0;
 		try {
@@ -340,7 +340,20 @@ public int selectUserForUpdate(String uid, String pass) {
 		}
 	}
 	
-	public void deleteUser() {}
+	public int deleteUser(String uid) {
+		int result = 0;
+		try {
+			logger.info("deleteUser start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.DELETE_USER);
+			psmt.setString(1, uid);
+			result = psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} 
+		return result;
+	}
 	
 	
 

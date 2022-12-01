@@ -32,7 +32,7 @@ public class Sql {
 												+ "`zip`=?,"
 												+ "`addr1`=?,"
 												+ "`addr2`=?";
-	public static final String UPDATE_USER_PASSWORD = "update `board_user` set `pass`=SHA2(?, 256) where `uid`=?";
+	public static final String UPDATE_USER_PASSWORD = "update `board_user` set `pass`=SHA2(?,256) where `uid`=?";
 	public static final String UPDATE_USER_FOR_SESSION = "update `board_user` set `sessId`=?, `sessLimitDate` = DATE_ADD(NOW(), INTERVAL 3 DAY) where `uid`=?";
 	public static final String UPDATE_USER_FOR_SESSION_OUT = "update `board_user` set `sessId`=NULL, `sessLimitDate`=NULL where `uid`=?";
 	
@@ -110,5 +110,6 @@ public class Sql {
 	public static final String DELETE_ARTICLE = "delete from `board_article` where `no`=? or `parent`=?";
 	public static final String DELETE_COMMENT = "delete from `board_article` where `no`=?";
 	public static final String DELETE_FILE = "delete from `board_file` where `parent`=?";
+	public static final String DELETE_USER = "update `board_user` set `grade`=0, `wdate`=NOW() where `uid`=?";
 	
 }
