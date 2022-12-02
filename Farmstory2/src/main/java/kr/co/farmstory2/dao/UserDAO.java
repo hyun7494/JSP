@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.farmstory2.db.DBHelper;
 import kr.co.farmstory2.db.Sql;
-import vo.TermsVO;
-import vo.UserVO;
+import kr.co.farmstory2.vo.TermsVO;
+import kr.co.farmstory2.vo.UserVO;
 
 public class UserDAO extends DBHelper{
 	

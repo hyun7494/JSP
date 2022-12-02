@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.farmstory2.dao.UserDAO;
-import vo.TermsVO;
+import kr.co.farmstory2.vo.TermsVO;
 
 @WebServlet("/user/terms.do")
 public class TermsController extends HttpServlet{

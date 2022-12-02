@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.farmstory2.dao.UserDAO;
-import vo.UserVO;
+import kr.co.farmstory2.vo.UserVO;
 
 @WebServlet("/user/login.do")
 public class LoginController extends HttpServlet{

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.farmstory2.dao.UserDAO;
-import vo.UserVO;
+import kr.co.farmstory2.vo.UserVO;
 
 @WebServlet("/user/register.do")
 public class RegisterController extends HttpServlet{

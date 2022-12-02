@@ -3,8 +3,10 @@
 <jsp:include page="./_${group}.jsp"/>
 <main id="board">
     <section class="write">
-
-        <form action="#">
+            <form action="/Farmstory2/board/write.do" method="post" enctype="multipart/form-data">
+    		<input type="hidden" name="uid" value="${sessUser.getUid()}"/>
+    		<input type="hidden" name="group" value="${group}"/>
+    		<input type="hidden" name="cate" value="${cate}"/>
             <table border="0">
                 <caption>글쓰기</caption>
                 <tr>
