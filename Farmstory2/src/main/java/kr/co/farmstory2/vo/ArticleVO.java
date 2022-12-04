@@ -17,6 +17,32 @@ public class ArticleVO {
 	// selectArticles 에서 조인으로 user에서 들고와서 추가
 	private String nick;
 	
+	// 추가
+	private String fname;
+	
+	// 추가
+	private int fno;
+	private String oriName;
+	public int getFno() {
+		return fno;
+	}
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+	public String getOriName() {
+		return oriName;
+	}
+	public void setOriName(String oriName) {
+		this.oriName = oriName;
+	}
+	public int getDownload() {
+		return download;
+	}
+	public void setDownload(int download) {
+		this.download = download;
+	}
+	private int download;
+	
 	public int getNo() {
 		return no;
 	}
@@ -28,6 +54,9 @@ public class ArticleVO {
 	}
 	public void setParent(int parent) {
 		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
 	}
 	public int getComment() {
 		return comment;
@@ -88,6 +117,12 @@ public class ArticleVO {
 	}
 	public void setNick(String nick) {
 		this.nick = nick;
+	}
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
 
 }
